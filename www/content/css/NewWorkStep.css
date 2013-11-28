@@ -1,0 +1,79 @@
+﻿.WorkStepContainer {
+    text-align: center;
+    background-color: black;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    border-color: #A9A9A9;
+    border-style: solid;
+    border-width: 1px;
+    background-color: #D2D2D2;
+    box-shadow: 2px 2px 5px #000000;
+    margin-bottom: 20px;
+    overflow-y: scroll;
+    scrollbar-base-color: white;
+    scrollbar-face-color: white;
+    scrollbar-3dlight-color: white;
+    scrollbar-arrow-color: white;
+    scrollbar-darkshadow-color: white;
+    scrollbar-highlight-color: white;
+    scrollbar-shadow-color: white;
+    scrollbar-track-color: white;
+    height: 300px;
+    width: 100%;
+    padding-top:20px;
+}
+
+.WorkStepButton {
+    margin-top:1px;
+    margin-left:10px;
+    margin-right:10px;
+    min-height:40px;
+    line-height:40px;
+    text-align: center;
+    background-color: black;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-color: #A9A9A9;
+    border-style: solid;
+    border-width: 1px;
+    background-color: #A3A3A3;
+    box-shadow: 2px 2px 5px #000000;
+}
+.Submenu {
+    margin-left:20px;
+    margin-right:20px;
+    min-height:40px;
+    line-height:40px;
+    text-align: center;
+    background-color: black;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-color: #A9A9A9;
+    border-style: solid;
+    border-width: 1px;
+    background-color: #A5A5A5;
+    box-shadow: 2px 2px 5px #000000;
+    padding-bottom:10px;
+}
+.Submenuitem {
+    margin-top:5px;
+    margin-left:10px;
+    margin-right:10px;
+    min-height:40px;
+    line-height:40px;
+    text-align: center;
+    background-color: #CBCBCB;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-color: #A9A9A9;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 2px 2px 5px #000000;
+    color:#595959;
+}

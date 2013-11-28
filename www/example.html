@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+	<head>
+		<title>Simple Test</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width">
+	</head>
+	<body>
+      <div id='login'><h3>Login/Logout</h3>
+			<form data-bind="submit: doLogin">
+				<input type='text' data-bind="value: username" />
+				<input type='password' data-bind="value: password" />
+				<input type="submit" value="Login" />
+			</form>
+			<input type="button" data-bind="click: doLogout" value="Logout" />
+		</div>
+		<hr/>
+		<div id="workRoutines"><h3>Arbeitsgänge</h3>
+			<div data-bind="foreach: {data: workGroups, as: 'workGroup'}">
+				<p data-bind="text: group"/><br/>
+				<ul data-bind="foreach: subItems">
+               <li><a href="#" data-bind="text: name, click: function(data, event) {$root.selectItem($data, workGroup.group);}"></a></li>
+				</ul>
+			</div>
+			<hr/>
+			<h3>Arbeitsgang-Formular</h3>
+			<p>Sie haben die Gruppe '<span data-bind="text: selectedGroup()"></span>' ausgewählt.</p>
+			<form action="#">
+				<select data-bind="foreach: selectedItem().paramItems, selectedOptions: selectedParamItem">
+					<option data-bind="value: $index, text: $data"></option>
+				</select>
+				<div data-bind="foreach: selectedItem().params">
+					<label data-bind="text: title"></label>: <input type="text" data-bind="enabled: enabled, attr: {value: $data.default[$parent.selectedParamItem()], disabled: !enabled, name: name}" /><br/>
+				</div>
+				<select id="acreList" data-bind="foreach: acres" multiple>
+					<option data-bind="text: name, value: _id"></option>
+				</select>
+				<label>Arbeiter:</label>: <input type="text" name="worker" /><br/>
+				<input type="submit" data-bind="click: $root.saveWorkRoutine" value="Speichern" />
+			</form>
+			<hr/>
+			<h3>Log-Ausgaben</h3>
+			<pre data-bind="text: ko.toJSON($data, null, 2)"></pre>
+		</div>
+		<script>
+			var workRoutinesViewModel, loginViewModel;
+		</script>
+		<script type="text/javascript" src="scripts/libraries/jquery/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="scripts/libraries/knockoutjs/knockout-min.js"></script>
+		<script type="text/javascript" src="scripts/libraries/kinvey/kinvey.js"></script>
+
+		<!-- Systems under test go here -->
+		<script type="text/javascript" src="scripts/utils.js"></script>
+		<script type="text/javascript" src="scripts/models/loginModel.js"></script>
+		<script type="text/javascript" src="scripts/models/workRoutinesModel.js"></script>
+		<script>
+			kinveyInit().then(function() {
+				workRoutinesViewModel = new WorkRoutinesViewModel();
+				loginViewModel = new LoginViewModel();
+				ko.applyBindings(workRoutinesViewModel, document.getElementById('workRoutines'));
+				ko.applyBindings(loginViewModel, document.getElementById('login'));
+			});
+		</script>
+	</body>
+</html>

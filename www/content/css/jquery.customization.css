@@ -1,0 +1,17 @@
+﻿.ui-icon-checkbox-on {
+    background-image: url(../images/checkbox_clicked.png);
+}
+
+.ui-icon-checkbox-off {
+    background-image: url(../images/checkbox_notclicked.png);
+}
+
+.ui-icon-checkbox-off, .ui-icon-checkbox-on {
+    display:block;
+    -moz-background-size: 864px 18px;
+    -o-background-size: 864px 18px;
+    -webkit-background-size: 864px 18px;
+    background-size: 864px 18px;
+    opacity:0.2;
+}
+.ui-icon { width: 34px; height: 32px; }
