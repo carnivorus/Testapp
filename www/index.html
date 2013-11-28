@@ -1,236 +1,45 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!--
-		
-            Licensed under the Apache License v2.0
-            http://www.apache.org/licenses/LICENSE-2.0
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
 
-            http://srivarenya.com
-            http://twitter.com/SriVarenya
-            -->
-    <meta charset="utf-8">
-    <title>AgrarApps</title>
-    <meta name="viewport" content="user-scalable=no,width=device-width" />
-    <!-- Bootstrap -->
-    <script src="js/libraries/jquery/jquery-1.10.2.min.js"></script>
-    <script src="js/libraries/jquery/jqueryMobile/jquery.mobile-1.3.2.min.js"></script>
-    <script type="text/javascript" src="js/libraries/knockoutjs/knockout-min.js"></script>
-    <script type="text/javascript" src="js/libraries/kinvey/kinvey.js"></script>
-    <script type="text/javascript" src="js/utils.js"></script>
-    <script type="text/javascript" src="js/models/loginModel.js"></script>
-    <script type="text/javascript" src="js/models/workRoutinesModel.js"></script>
-    <script src="js/custom.js"></script>
-    <link rel="stylesheet" href="css/jquery.mobile.structure-1.3.2.css" />
-    <link rel="stylesheet" href="css/Main.css" />
-    <link rel="stylesheet" href="css/Fertilizer.css" />
-    <link rel="stylesheet" href="css/MainMenu.css" />
-    <link rel="stylesheet" href="css/NewWorkStep.css" />
-    <link rel="stylesheet" href="css/jquery.customization.css" />
-    <script>
-        var workRoutinesViewModel, loginViewModel;
-    </script>
-    <script>
-        kinveyInit().then(function () {
-            workRoutinesViewModel = new WorkRoutinesViewModel();
-            loginViewModel = new LoginViewModel();
-            ko.applyBindings(workRoutinesViewModel, document.getElementById('workRoutines'));
-            ko.applyBindings(loginViewModel, document.getElementById('login'));
-        });
-    </script>
-</head>
-<body>
-    <!--Registrierung/Anmeldung-->
-    <div data-role="page" class="MainContainer" id="Registration">
-        <a href="#ChooseFields">Felder</a>
-        <a href="#MainMenu">Hauptmenü</a>
-        <div data-role="header" class="MainHeader">
-            <img style="width: 100%" src="img//agrarcockpit_logo.png" />
-        </div>
-        <div data-role="content" id="login">
-            <form data-bind="submit: doLogin">
-                <div data-role="fieldcontain" style="margin-left: auto; margin-right: auto; margin-bottom: 10px; height: 30px;" class="TextBox">
-                    <input type="text" data-bind="value: username" name="name" id="name" value="Benutzername" style="color: white; text-align: center;" />
-                </div>
-                <div data-role="fieldcontain" class="TextBox" style="margin-bottom: 10px; height: 30px;">
-                    <input data-bind="value: password" style="color: white; text-align: center;" type="password" name="password" id="password" value="" />
-                </div>
-                <div data-role="fieldcontain" class="CheckBox">
-                    <input type="checkbox" name="checkbox-1" id="checkbox-1" />
-                    <label for="checkbox-1" style="margin-top: -13px; line-height: 15px;">Angemeldet bleiben</label>
-                </div>
-                <div class="StartButton">
-                    <input type="submit" value="Los geht's" />
-                </div>
-            </form>
-        </div>
-    </div>
-    <!--Hauptmenü-->
-    <div data-role="page" class="MainContainer" id="MainMenu">
-        <div data-role="header" class="MainHeader">
-            <img style="width: 100%" src="img//agrarcockpit_logo.png" />
-        </div>
-        <div data-role="content">
-            <div class="MainMenuButton" data-role="fieldcontain">
-                <div class="MainMenuButtonLeft">
-                </div>
-                <div class="MainMenuButtonRight">
-                    <div>Arbeiten</div>
-                    <div class="LineSplit"></div>
-                    <div><a href="#NewWorkStep">(Neuer Arbeitsgang)</a></div>
-                </div>
-            </div>
-            <div class="MainMenuButton" data-role="fieldcontain">
-                <div class="MainMenuButtonLeft">
-                </div>
-                <div class="MainMenuButtonRight">
-                    <div>Nacharbeiten</div>
-                    <div class="LineSplit"></div>
-                    <div>(Arbeitsgang ändern)</div>
-                </div>
-            </div>
-            <div class="MainMenuButton" data-role="fieldcontain">
-                <div class="MainMenuButtonLeft">
-                </div>
-                <div class="MainMenuButtonRight">
-                    <div>Auswerten</div>
-                    <div class="LineSplit"></div>
-                    <div>(Ergebnisse ansehen)</div>
-                </div>
-            </div>
-            <div class="MainMenuButton" data-role="fieldcontain">
-                <div class="MainMenuButtonLeft">
-                </div>
-                <div class="MainMenuButtonRight">
-                    <div>Einstellungen</div>
-                    <div class="LineSplit"></div>
-                    <div>(Allgemeine Optionen)</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--Neuer Arbeitsgang Hauptseite-->
-    <div data-role="page" class="MainContainer" id="NewWorkStep">
-        <div data-role="header" class="MainHeader">
-            <img style="width: 100%" src="img//agrarcockpit_logo.png" />
-        </div>
-        <div data-role="content" id="workRoutines">
-            <div class="WorkStepContainer">
-                <div data-bind="foreach: {data: workGroups, as: 'workGroup'}">
-						 <div class="WorkStepButton" data-bind="click: function(data, event) {$root.switchVisibility($data, event);}, text: group"></div>
-                   <div class="Submenu invisible" data-bind="foreach: subItems">
-							 <div class="Submenuitem"><a href="#" data-bind="text: name, click: function(data, event) {$root.selectItem($data, workGroup.group);}"></a></div>
-                   </div>
-                </div>
-            </div>
-			  
-            <pre data-bind="text: ko.toJSON($data, null, 2)"></pre>
-        </div>
-    </div>
-    <!--Neuen Dünger erfassen-->
-    <!--<form action="#">
-            <select data-bind="foreach: selectedItem().paramItems, selectedOptions: selectedParamItem">
-                <option data-bind="value: $index, text: $data"></option>
-            </select>
-            <div data-bind="foreach: selectedItem().params">
-                <label data-bind="text: title"></label>
-                :
-                <input type="text" data-bind="enabled: enabled, attr: {value: $data.default[$parent.selectedParamItem()], disabled: !enabled, name: name}" /><br />
-            </div>
-            <input type="submit" data-bind="click: $root.saveWorkRoutine" value="Speichern" />
-        </form>-->
-    <div data-role="page" class="MainContainer" id="NewFertilizer">
-        <div data-role="header" class="MainHeader">
-            <img style="width: 100%" src="img//agrarcockpit_logo.png" />
-        </div>
-        <div data-role="content" class="FertilizerContainer" style="margin-top: 10px;">
-            <div data-role="fieldcontain" class="FertilizerControlContainer">
-                <input type="text" name="name" id="Text1" value="Düngername" style="text-align: left; color: #D9D9D9;" />
-            </div>
-            <div data-role="fieldcontain" class="FertilizerControlContainer">
-                <input type="text" name="name" id="Text2" value="kg/ha" style="text-align: left; color: #D9D9D9;" />
-            </div>
-            <div data-role="fieldcontain" class="FertilizerControlContainer" style="height: 30px;">
-                <input type="text" name="name" id="Text3" value="Bemerkung" style="text-align: left; color: #D9D9D9;" />
-            </div>
-            <div data-role="fieldcontain" class="CheckBox" style="margin-bottom: 10px;">
-                <input type="checkbox" name="checkbox-1" id="checkbox1" />
-                <label for="checkbox-1" style="margin-top: -13px; line-height: 15px;">Unterfußdüngung</label>
-            </div>
-            <div data-role="fieldcontain" class="FertilizerControlContainer">+Neue Eigenschaft</div>
-        </div>
-        <a href="#ChooseFields">
-            <img src="Images/FertilizerContinue.png" style="border: 0; margin-left: 15px; margin-right: auto; margin-top: 10px; width: 279px;" /></a>
-    </div>
-    <!--Feldauswahl-->
-    <div data-role="page" class="MainContainer" id="ChooseFields">
-        <div data-role="header" class="MainHeader">
-            <img style="width: 100%" src="img//agrarcockpit_logo.png" />
-        </div>
-        <div data-role="content">
-            
-        </div>
-    </div>
-    <!--Arbeitsgangrahmendaten erfassen-->
-    <div data-role="page" class="MainContainer" id="InputWorkStepMetadata">
-        <div data-role="header" class="MainHeader">
-            <img style="width: 100%" src="img//agrarcockpit_logo.png" />
-        </div>
-        <div data-role="content">
-            <div data-role="fieldcontain" style="margin-left: auto; margin-right: auto; margin-bottom: 10px; height: 30px;" class="TextBox">
-                <input type="text" name="name" id="Text5" value="Benutzername" style="color: white; text-align: center;" />
-            </div>
-            <div data-role="fieldcontain" class="TextBox" style="margin-bottom: 10px; height: 30px;">
-                <input style="color: white; text-align: center;" type="password" name="password" id="password5" value="" />
-            </div>
-            <div data-role="fieldcontain" class="CheckBox">
-                <input type="checkbox" name="checkbox-1" id="checkbox5" />
-                <label for="checkbox-1" style="margin-top: -13px; line-height: 15px;">Angemeldet bleiben</label>
-            </div>
-            <a href="#main2">
-                <div class="StartButton">
-                    Los<br />
-                    geht's
-                </div>
-            </a>
-        </div>
-    </div>
-    <!--Arbeitsgang Zusammenfassung-->
-    <div data-role="page" class="MainContainer" id="WorkStepSummary">
-        <div data-role="header" class="MainHeader">
-            <img style="width: 100%" src="img//agrarcockpit_logo.png" />
-        </div>
-        <div data-role="content">
-            <div data-role="fieldcontain" style="margin-left: auto; margin-right: auto; margin-bottom: 10px; height: 30px;" class="TextBox">
-                <input type="text" name="name" id="Text6" value="Benutzername" style="color: white; text-align: center;" />
-            </div>
-            <div data-role="fieldcontain" class="TextBox" style="margin-bottom: 10px; height: 30px;">
-                <input style="color: white; text-align: center;" type="password" name="password" id="password6" value="" />
-            </div>
-            <div data-role="fieldcontain" class="CheckBox">
-                <input type="checkbox" name="checkbox-1" id="checkbox6" />
-                <label for="checkbox-1" style="margin-top: -13px; line-height: 15px;">Angemeldet bleiben</label>
-            </div>
-            <a href="#main2">
-                <div class="StartButton">
-                    Los<br />
-                    geht's
-                </div>
-            </a>
-        </div>
-    </div>
-    <div data-role="page" id="main2">
-        <div data-role="header">
-            <h1>AgrarApps Seite 2</h1>
-        </div>
+    http://www.apache.org/licenses/LICENSE-2.0
 
-        <div data-role="content">
-            <p>Inhalt 2</p>
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>Hello World</title>
+    </head>
+    <body>
+        <div class="app">
+            <h1>PhoneGap</h1>
+			testtextadfasdfasdfasdf
+            <div id="deviceready" class="blink">
+                <p class="event listening">Connecting to Device</p>
+				<p class="">testConnecting to Device</p>
+                <p class="event received">Device is Ready</p>
+            </div>
+			<button>Test</button>
         </div>
-
-        <div data-role="footer">
-            <h1>Copyright 2</h1>
-        </div>
-    </div>
-</body>
+        <script type="text/javascript" src="phonegap.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+    </body>
 </html>
